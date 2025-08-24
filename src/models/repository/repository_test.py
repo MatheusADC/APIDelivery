@@ -59,5 +59,40 @@ def test_select_id_property_exists():
     for doc in response:
         print(doc)
         print()
+
+@pytest.mark.skip(reason="interacao com o banco")
+def test_select_many_with_multiple_filter():
+    orders_repository = OrdersRepository(conn)
+    doc_filter = {
+        "cupom": True,
+        "itens.doce": { "$exists": True }
+    }
+    response = orders_repository.select_many(doc_filter)
+    print()
+    for doc in response:
+        print(doc)
+        print()
+
+@pytest.mark.skip(reason="interacao com o banco")
+def test_select_many_with_or_filter():
+    orders_repository = OrdersRepository(conn)
+    doc_filter = {
+        "$or": [{ "address": { "$exists": True } },
+                { "itens.doce.tipo": "Chocolate" }
+        ]
+    }
+    response = orders_repository.select_many(doc_filter)
+    print()
+    print()
+    for doc in response:
+        print(doc)
+        print()
+
+def test_select_by_object_id():
+    orders_repository = OrdersRepository(conn)
+    object_id = "YOUR_OBJECT_ID"
+    response = orders_repository.select_by_object_id(object_id)
+    print()
+    print(response)
     
 # pytest -s -v src/models/repository/repository_test.py
