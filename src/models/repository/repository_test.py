@@ -66,7 +66,7 @@ def test_select_many_with_multiple_filter():
     doc_filter = {
         "cupom": True,
         "itens.doce": { "$exists": True }
-    }
+    } # Semelhante a uma busca AND em SQL
     response = orders_repository.select_many(doc_filter)
     print()
     for doc in response:
@@ -80,7 +80,7 @@ def test_select_many_with_or_filter():
         "$or": [{ "address": { "$exists": True } },
                 { "itens.doce.tipo": "Chocolate" }
         ]
-    }
+    } # Semelhante a uma busca OR em SQL
     response = orders_repository.select_many(doc_filter)
     print()
     print()
@@ -88,11 +88,25 @@ def test_select_many_with_or_filter():
         print(doc)
         print()
 
+@pytest.mark.skip(reason="interacao com o banco")
 def test_select_by_object_id():
     orders_repository = OrdersRepository(conn)
-    object_id = "YOUR_OBJECT_ID"
+    object_id = "68a38c6789572a6b28f46fd9"
     response = orders_repository.select_by_object_id(object_id)
     print()
     print(response)
-    
-# pytest -s -v src/models/repository/repository_test.py
+
+@pytest.mark.skip(reason="interacao com o banco")
+def test_edit_registry():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit_registry()
+
+@pytest.mark.skip(reason="interacao com o banco")
+def test_many_edit_registries():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit_many_registries()
+
+@pytest.mark.skip(reason="interacao com o banco")
+def test_edit_registry_with_increment():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit_registry_with_increment()
