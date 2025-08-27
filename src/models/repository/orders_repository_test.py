@@ -32,4 +32,15 @@ def test_insert_document():
     print(collection.insert_one_attributes)
     assert collection.insert_one_attributes["dict"] == doc
 
+def test_select_many_with_properties():
+    collection = CollectionMock()
+    db_collection = DbCollectionMock(collection)
+    repo = OrdersRepository(db_collection)
+
+    doc = { "testando": "find" }
+    repo.select_many_with_properties(doc)
+
+    assert collection.find_attributes["args"][0] == doc
+    assert collection.find_attributes["args"][1] == { "_id": 0, "cupom": 0 }
+
 # pytest src/models/repository/orders_repository_test.py
