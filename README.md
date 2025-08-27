@@ -26,3 +26,11 @@ pip install pytest==8.2.2
 ```
 pip freeze > requirements.txt
 ```
+### Install Flask
+```
+pip install Flask==3.0.3
+```
+### Run Server
+```
+python run.py
+```
