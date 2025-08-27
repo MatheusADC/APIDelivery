@@ -1,6 +1,7 @@
 from bson.objectid import ObjectId
+from .interfaces.orders_repository import OrdersRepositoryInterface
 
-class OrdersRepository:
+class OrdersRepository(OrdersRepositoryInterface):
     def __init__(self, db_connection) -> None:
         self.__collection_name = "orders"
         self.__db_connection = db_connection
@@ -26,8 +27,8 @@ class OrdersRepository:
     def select_many_with_properties(self, doc_filter: dict) -> list:
         collection = self.__db_connection.get_collection(self.__collection_name)
         data = collection.find(
-            doc_filter, 
-            { "_id": 0, "cupom": 0 } 
+            doc_filter, # filtro de busca
+            { "_id": 0, "cupom": 0 } # opções de retorno
         )
         return data
      
@@ -47,8 +48,8 @@ class OrdersRepository:
     def edit_registry(self) -> None:
         collection = self.__db_connection.get_collection(self.__collection_name)
         collection.update_one(
-            { "_id": ObjectId('68a38c8389572a6b28f46fda') }, 
-            { "$set": { "itens.energetico.quantidade": 30 } } 
+            { "_id": ObjectId('68a38c8389572a6b28f46fda') }, # Filtros
+            { "$set": { "itens.energetico.quantidade": 30 } } # Edição
         )
 
     def edit_many_registries(self) -> None:
