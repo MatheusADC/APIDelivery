@@ -12,4 +12,7 @@ class DBConnectionHandler():
         self.__db_connection = self.__client[self.__database_name]
 
     def get_db_connection(self):
+
         return self.__db_connection
+
+db_connection_handler = DBConnectionHandler()
