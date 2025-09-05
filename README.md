@@ -34,3 +34,8 @@ pip install Flask==3.0.3
 ```
 python run.py
 ```
+
+### Install Cerberus
+```
+pip install Cerberus==1.3.5
+```
