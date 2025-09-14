@@ -13,11 +13,8 @@ def registry_order_validator(body: any):
                     "schema": {
                         "type": "dict",
                         "schema": {
-                            "type": "dict",
-                            "schema": {
-                                "item": { "type": "string", "required": True },
-                                "quantidade": { "type": "integer", "required": True }
-                            }
+                            "item": { "type": "string", "required": True },
+                            "quantidade": { "type": "integer", "required": True }
                         }
                     }
                 }
