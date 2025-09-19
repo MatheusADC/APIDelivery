@@ -45,11 +45,11 @@ class OrdersRepository(OrdersRepositoryInterface):
         data = collection.find_one({ "_id": ObjectId(object_id) })
         return data
     
-    def edit_registry(self) -> None:
+    def edit_registry(self, order_id: str, update_fields: dict) -> None:
         collection = self.__db_connection.get_collection(self.__collection_name)
         collection.update_one(
-            { "_id": ObjectId('68a38c8389572a6b28f46fda') }, # Filtros
-            { "$set": { "itens.energetico.quantidade": 30 } } # Edição
+            { "_id": ObjectId(order_id) }, # Filtros
+            { "$set": update_fields } # Edição
         )
 
     def edit_many_registries(self) -> None:
@@ -73,3 +73,4 @@ class OrdersRepository(OrdersRepositoryInterface):
     def delete_many_registries(self) -> None:
         collection = self.__db_connection.get_collection(self.__collection_name)
         collection.delete_many({ "itens.doce": { "$exists": True } })
+
